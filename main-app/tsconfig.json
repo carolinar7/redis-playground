@@ -10,7 +10,4 @@
     "rootDir": "./src"
   },
   "include": ["src/**/*"],
-  "references": [
-    { "path": "../redis-server-module" }
-  ]
 } 

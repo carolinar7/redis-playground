@@ -13,6 +13,12 @@ async function startServer() {
   });
 }
 
+async function cleanup() {
+  console.log('\nShutting down...');
+  await redisService.stop();
+  process.exit(0);
+}
+
 async function main() {
   try {
     await redisService.start();
@@ -38,13 +44,12 @@ async function main() {
 
     await startServer();
 
-    process.on('SIGTERM', async () => {
-      await redisService.stop();
-      process.exit(0);
-    });
+    // Handle both SIGTERM (from Docker/deployment) and SIGINT (Ctrl+C)
+    process.on('SIGTERM', cleanup);
+    process.on('SIGINT', cleanup);
 
   } catch (error) {
-    console.error('Failed to start application:', error);
+    console.error('Failed to start server:', error);
     process.exit(1);
   }
 }
