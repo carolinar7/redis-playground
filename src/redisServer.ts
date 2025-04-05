@@ -1,4 +1,4 @@
-import { RedisServer } from 'redis-server';
+import RedisServer from 'redis-server';
 
 class RedisServerService {
   private server: RedisServer;
