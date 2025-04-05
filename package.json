@@ -2,6 +2,9 @@
   "name": "redis-playground",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "dev": "cd main-app && bun run dev"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/express": "^5.0.1"
