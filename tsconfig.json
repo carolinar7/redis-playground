@@ -25,5 +25,9 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
-  }
+  },
+  "references": [
+    { "path": "redis-server-module/tsconfig.json" },
+    { "path": "main-app/tsconfig.json" }
+  ]
 }

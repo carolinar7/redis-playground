@@ -1,10 +1,13 @@
 import express from 'express';
 import { redisService } from './redis';
-import { RedisService} from './redis';
+import { RedisServerService } from 'redis-server';
 
 const app = express();
 const PORT = 3000;
-const redisServer = new RedisService();
+const redisServer = new RedisServer({
+  port: 6379,
+  bin: 'redis-server'
+});
 
 async function startServer() {
   return new Promise((resolve) => {
@@ -17,7 +20,10 @@ async function startServer() {
 
 async function main() {
   try {
-    // Start Redis service
+    // First start the Redis server
+    await redisServer.start();
+    
+    // Then connect the Redis client
     await redisService.start();
     
     // Setup middleware
@@ -45,9 +51,10 @@ async function main() {
     // Start server
     await startServer();
 
-    // Setup graceful shutdown
+    // Graceful shutdown
     process.on('SIGTERM', async () => {
-      await redisService.stop();
+      await redisService.stop();  // Stop client first
+      await redisServer.stop();   // Then stop server
       process.exit(0);
     });
 
