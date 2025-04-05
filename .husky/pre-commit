@@ -1,4 +1,14 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+echo "🔍 Running type check..."
+bun run typecheck
+TYPE_CHECK_RESULT=$?
+
+if [ $TYPE_CHECK_RESULT -ne 0 ]; then
+  echo "❌ Type check failed! Please fix the errors above."
+  exit 1
+fi
+
+echo "✅ Type check passed!"
 bunx lint-staged 
