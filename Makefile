@@ -1,4 +1,4 @@
-.PHONY: setup dev down help docker-up docker-down
+.PHONY: setup dev down help docker-up docker-down typecheck
 
 # Default target when just running 'make'
 .DEFAULT_GOAL := help
@@ -15,6 +15,7 @@ help:
 	@echo "$(BLUE)make docker-up$(NC) - Start Docker containers"
 	@echo "$(BLUE)make docker-down$(NC) - Stop Docker containers"
 	@echo "$(BLUE)make down$(NC)      - Stop all services"
+	@echo "$(BLUE)make typecheck$(NC) - Run TypeScript type checking"
 
 # Setup command
 setup:
@@ -39,3 +40,8 @@ docker-down:
 # Stop all services
 down: docker-down
 	@echo "Stopping all services..."
+
+# Add this new command
+typecheck:
+	@echo "Running TypeScript type checking..."
+	@bun run typecheck

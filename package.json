@@ -3,11 +3,15 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
+    "prepare": "husky install",
+    "typecheck": "tsc --build --verbose",
     "dev": "cd main-app && bun run dev"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/express": "^5.0.1"
+    "@types/express": "^5.0.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2"
   },
   "peerDependencies": {
     "typescript": "^5"
@@ -17,6 +21,11 @@
     "express": "^5.1.0",
     "redis": "^4.7.0",
     "redis-server": "^1.2.2"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "bun run typecheck"
+    ]
   },
   "private": true
 }

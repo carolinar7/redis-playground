@@ -27,6 +27,6 @@
     "noPropertyAccessFromIndexSignature": false
   },
   "references": [
-    { "path": "main-app/tsconfig.json" }
+    { "path": "main-app" }
   ]
 }
