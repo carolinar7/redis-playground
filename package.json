@@ -13,5 +13,6 @@
     "express": "^5.1.0",
     "redis": "^4.7.0",
     "redis-server": "^1.2.2"
-  }
+  },
+  "private": true
 }
