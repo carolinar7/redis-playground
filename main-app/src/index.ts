@@ -1,9 +1,10 @@
 import express from 'express';
-import { redisService } from './src/redis';
-import { redisServer } from './src/redisServer';
+import { redisService } from './redis';
+import { RedisService} from './redis';
 
 const app = express();
 const PORT = 3000;
+const redisServer = new RedisService();
 
 async function startServer() {
   return new Promise((resolve) => {
@@ -14,14 +15,10 @@ async function startServer() {
   });
 }
 
-// Main function to handle startup
 async function main() {
   try {
-    // Start Redis server first
-    await redisServer.start();
-    
-    // Then connect Redis client
-    await redisService.connect();
+    // Start Redis service
+    await redisService.start();
     
     // Setup middleware
     app.use(express.json());
@@ -50,8 +47,7 @@ async function main() {
 
     // Setup graceful shutdown
     process.on('SIGTERM', async () => {
-      await redisService.disconnect();
-      await redisServer.stop();
+      await redisService.stop();
       process.exit(0);
     });
 
@@ -61,5 +57,4 @@ async function main() {
   }
 }
 
-// Run the application
-main();
+main(); 
