@@ -9,6 +9,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "express": "^5.1.0",
     "redis": "^4.7.0"
   }
 }
