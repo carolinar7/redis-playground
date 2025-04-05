@@ -10,6 +10,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "redis-server": "^1.2.2"
   }
 }
